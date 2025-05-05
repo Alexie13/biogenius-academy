@@ -140,6 +140,72 @@
             border-left: 4px solid var(--primary-color);
             color: var(--primary-color);
         }
+        
+        /* Stiluri pentru submeniu */
+        .submenu {
+            display: none;
+            padding-left: 15px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .submenu li {
+            margin-bottom: 0 !important;
+        }
+        
+        .submenu li a {
+            padding: 8px 15px !important;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .has-submenu.active .submenu {
+            display: block;
+        }
+        
+        .has-submenu .menu-toggle::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .has-submenu.active .menu-toggle::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Stiluri pentru sub-submeniu */
+        .sub-submenu {
+            display: none;
+            padding-left: 15px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .sub-submenu li {
+            margin-bottom: 0 !important;
+        }
+        
+        .sub-submenu li a {
+            padding: 6px 10px !important;
+            font-size: 0.85em;
+            opacity: 0.85;
+        }
+        
+        .has-sub-submenu.active .sub-submenu {
+            display: block;
+        }
+        
+        .has-sub-submenu .sub-menu-toggle::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .has-sub-submenu.active .sub-menu-toggle::after {
+            transform: rotate(180deg);
+        }
 
         /* Main Content Styles */
         .main-content {
@@ -374,16 +440,23 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-menu">
             <ul>
-                <li><a href="#">Optiunea 1</a></li>
-                <li><a href="#">Optiunea 2</a></li>
-                <li><a href="#">Optiunea 3</a></li>
-                <li><a href="#">Optiunea 4</a></li>
-                <li><a href="#">Optiunea 5</a></li>
-                <li><a href="#">Optiunea 6</a></li>
-                <li><a href="#">Optiunea 7</a></li>
-                <li><a href="#">Optiunea 8</a></li>
-                <li><a href="#">Optiunea 9</a></li>
-                <li><a href="#">Optiunea 10</a></li>
+                <li class="has-submenu">
+                    <a href="#" class="menu-toggle">Cursuri</a>
+                    <br>
+                    <ul class="submenu">
+                        <li class="has-sub-submenu">
+                            <a href="#" class="sub-menu-toggle">Proba Teoretică</a>
+                            <ul class="sub-submenu">
+                                <li><a href="#">Citologia</a></li>
+                                <li><a href="#">Ereditatea</a></li>
+                                <li><a href="#">Variabilitatea Lumii Vii</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Proba Practică</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Grile</a></li>
+                <li><a href="#">Simulări</a></li>
             </ul>
         </div>
     </div>
@@ -398,36 +471,26 @@
             
             <div class="card-container">
                 <div class="card turquoise">
-                    <h3>Exemplu 1</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități.</p>
+                    <h3>Introducere în BioGenius Academy.</h3>
+                    <p>BioGenius Academy este o platformă dedicată elevilor de clasa a 9-a care au ca și pasiune BIOLOGIA și vor să participe și să exceleze la Olimpiada Națională de Biologie (ONB). Noi îi sprijinim cu materia bine structurată și concentrată din toate resursele, pentru a le fi mai ușor elevilor, grile pentru diverse capitole distincte destinate testării competenței fiecăruia și simulări care respectă formatul unei olimpiade reale, pregătindu-i astfel pentru competiție.</p>
                 </div>
                 <div class="card orange">
-                    <h3>Exemplu 2</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități. Acesta este un cadran pentru conținut mai amplu.</p>
+                    <h3>Olimpiada Națională de Biologie (ONB).</h3>
+                    <p>Olimpiada Națională de Biologie (ONB) este o competiție academică dedicată elevilor pasionați de biologie, desfășurată anual în România. Aceasta oferă participanților oportunitatea de a-și demonstra cunoștințele și abilitățile atât teoretice, cât și practice, în cadrul unor probe complexe. Concursul se desfășoară în mai multe etape: județeană, națională și internațională, având ca scop promovarea excelenței în domeniul biologiei și stimularea interesului pentru științele vieții.</p>
                 </div>
                 <div class="card yellow">
-                    <h3>Exemplu 3</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități.</p>
+                    <h3>Cursuri: Proba teoretică, proba practică.</h3>
+                    <p>Platforma BioGenius Academy conține CURSURI care includ materia pentru etapa națională și județeană a ONB, acestea fiind structurate în două părți: proba teoretică și proba practică.
+                        - Proba teoretica: Proba teoretică a Olimpiadei de Biologie testează cunoștințele prin întrebări grilă, probleme și eseuri, acoperind diverse domenii ale biologiei și punând accent pe gândirea critică. Capitolele care intră în proba teoretică sunt: Citologia (studiul celulelor), Ereditatea și variabilitatea lumii vii, Diversitatea lumii vii.
+                         - Proba practica: Proba practică a Olimpiadei de Biologie evaluează abilitățile de analiză și aplicare prin experimente, observații microscopice și interpretarea unor fenomene biologice, testând dexteritatea și gândirea logică.</p>
                 </div>
                 <div class="card turquoise">
-                    <h3>Exemplu 4</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități.</p>
+                    <h3>Grile</h3>
+                    <p>Rezolvă gratuit grile pentru Olimpiada de Biologie – clasa a 9-a! BioGenius îți oferă o selecție de grile concepute conform materiei de concurs, pentru o pregătire solidă și eficientă. Testează-ți cunoștințele și perfecționează-ți strategia de rezolvare!</p>
                 </div>
                 <div class="card orange">
-                    <h3>Exemplu 5</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități.</p>
-                </div>
-                <div class="card yellow">
-                    <h3>Exemplu 6</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități. Cadranul poate avea și mai mult conținut.</p>
-                </div>
-                <div class="card turquoise">
-                    <h3>Exemplu 7</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități. Acesta este un cadran pentru conținut mai amplu.</p>
-                </div>
-                <div class="card orange">
-                    <h3>Exemplu 8</h3>
-                    <p>Acesta este un cadran de exemplu care poate conține diverse informații sau funcționalități. Cadranul poate avea și mai mult conținut.</p>
+                    <h3>Simulări de olimpiadă: județeană și națională.</h3>
+                    <p>5. Pregătește-te să cucerești Olimpiada de Biologie cu simulările județene și naționale! Aceste teste te ajută să îți evaluezi cunoștințele, să îți îmbunătățești strategia de rezolvare și să capeți încredere înainte de competiția reală. Exersează în condiții similare concursului și fii cu un pas înaintea provocării!</p>
                 </div>
             </div>
         </div>
@@ -455,12 +518,60 @@
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
                 spans[2].style.transform = 'none';
+                
+                // Close any open submenus when closing the sidebar
+                const openSubmenus = document.querySelectorAll('.has-submenu.active, .has-sub-submenu.active');
+                openSubmenus.forEach(item => {
+                    item.classList.remove('active');
+                });
             }
         }
         
         // Event Listeners
         menuToggle.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
+        
+        // Submenu Toggle
+        const submenuItems = document.querySelectorAll('.has-submenu .menu-toggle');
+        
+        submenuItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                
+                // Toggle the active class on the parent li
+                parent.classList.toggle('active');
+                
+                // Close other open submenus if needed
+                const allSubmenus = document.querySelectorAll('.has-submenu');
+                allSubmenus.forEach(submenuItem => {
+                    if(submenuItem !== parent && submenuItem.classList.contains('active')) {
+                        submenuItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Sub-Submenu Toggle
+        const subSubmenuItems = document.querySelectorAll('.has-sub-submenu .sub-menu-toggle');
+        
+        subSubmenuItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                
+                // Toggle the active class on the parent li
+                parent.classList.toggle('active');
+                
+                // Close other open sub-submenus if needed
+                const allSubSubmenus = document.querySelectorAll('.has-sub-submenu');
+                allSubSubmenus.forEach(subSubmenuItem => {
+                    if(subSubmenuItem !== parent && subSubmenuItem.classList.contains('active')) {
+                        subSubmenuItem.classList.remove('active');
+                    }
+                });
+            });
+        });
         
         // Card Animation on Scroll
         const cards = document.querySelectorAll('.card');
