@@ -1,648 +1,673 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Biogenius Academy</title>
-    <style>
-        :root {
-            --primary-color: #00e6c0;
-            --secondary-color: #00b3a1;
-            --background-color: #021726;
-            --dark-color: #01111b;
-            --text-color: #ffffff;
-            --sidebar-width: 250px;
-            --header-height: 60px;
-            --card-background: rgba(0, 230, 192, 0.1);
-            --card-border: rgba(0, 230, 192, 0.3);
-            --orange-neon: #FF9500;
-            --orange-dark: #FF5E3A;
-            --yellow-neon: #FFD60A;
-            --yellow-dark: #FFC107;
-        }
+    <!DOCTYPE html>
+    <html lang="ro">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Biogenius Academy</title>
+        <style>
+            :root {
+                --primary-color: #00e6c0;
+                --secondary-color: #00b3a1;
+                --background-color: #021726;
+                --dark-color: #01111b;
+                --text-color: #ffffff;
+                --sidebar-width: 250px;
+                --header-height: 60px;
+                --card-background: rgba(0, 230, 192, 0.1);
+                --card-border: rgba(0, 230, 192, 0.3);
+                --orange-neon: #FF9500;
+                --orange-dark: #FF5E3A;
+                --yellow-neon: #FFD60A;
+                --yellow-dark: #FFC107;
+            }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
 
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
+            body {
+                background-color: var(--background-color);
+                color: var(--text-color);
+                overflow-x: hidden;
+            }
 
-        .container {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            transition: margin-left 0.4s ease;
-        }
+            .container {
+                width: 100%;
+                min-height: 100vh;
+                position: relative;
+                transition: margin-left 0.4s ease;
+            }
 
-        /* Header Styles */
-        header {
-            height: var(--header-height);
-            background-color: var(--dark-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-        }
+            /* Header Styles */
+            header {
+                height: var(--header-height);
+                background-color: var(--dark-color);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            }
 
-        .menu-toggle {
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            z-index: 20;
-        }
+            .menu-toggle {
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                z-index: 20;
+            }
 
-        .menu-toggle span {
+            .menu-toggle span {
+                display: block;
+                width: 100%;
+                height: 3px;
+                background-color: var(--primary-color);
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .logo h1 {
+                color: var(--primary-color);
+                font-size: 1.5rem;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            /* Sidebar Styles */
+            .sidebar {
+                width: var(--sidebar-width);
+                height: 100vh;
+                background-color: var(--dark-color);
+                position: fixed;
+                top: 0;
+                left: -300px;
+                transition: left 0.4s ease;
+                z-index: 15;
+                padding-top: var(--header-height);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+                overflow-y: auto;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .sidebar-menu {
+                padding: 20px 0;
+            }
+
+            .sidebar-menu ul {
+                list-style: none;
+            }
+
+            .sidebar-menu ul li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar-menu ul li a {
+                display: block;
+                padding: 12px 20px;
+                color: var(--text-color);
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border-left: 4px solid transparent;
+            }
+
+            .sidebar-menu ul li a:hover {
+                background-color: rgba(0, 230, 192, 0.1);
+                border-left: 4px solid var(--primary-color);
+                color: var(--primary-color);
+            }
+            
+            /* Stiluri pentru submeniu */
+            .submenu {
+                display: none;
+                padding-left: 15px;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            .submenu li {
+                margin-bottom: 0 !important;
+            }
+            
+            .submenu li a {
+                padding: 8px 15px !important;
+                font-size: 0.9em;
+                opacity: 0.9;
+            }
+            
+            .has-submenu.active .submenu {
+                display: block;
+            }
+            
+            .has-submenu .menu-toggle::after {
+                content: '▼';
+                font-size: 0.7em;
+                margin-left: 5px;
+                transition: transform 0.3s ease;
+            }
+            
+            .has-submenu.active .menu-toggle::after {
+                transform: rotate(180deg);
+            }
+            
+            /* Stiluri pentru sub-submeniu */
+            .sub-submenu {
+                display: none;
+                padding-left: 15px;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            .sub-submenu li {
+                margin-bottom: 0 !important;
+            }
+            
+            .sub-submenu li a {
+                padding: 6px 10px !important;
+                font-size: 0.85em;
+                opacity: 0.85;
+            }
+            
+            .has-sub-submenu.active .sub-submenu {
+                display: block;
+            }
+            
+            .has-sub-submenu .sub-menu-toggle::after {
+                content: '▼';
+                font-size: 0.7em;
+                margin-left: 5px;
+                transition: transform 0.3s ease;
+            }
+            
+            .has-sub-submenu.active .sub-menu-toggle::after {
+                transform: rotate(180deg);
+            }
+
+            /* Main Content Styles */
+            .main-content {
+                margin-top: var(--header-height);
+                padding: 20px;
+                transition: margin-left 0.4s ease;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow-x: hidden;
+            }
+
+            .page-title {
+                margin-bottom: 30px;
+                position: relative;
+                padding-bottom: 10px;
+            }
+
+            .page-title::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 50px;
+                height: 3px;
+                background-color: var(--primary-color);
+            }
+
+            .card-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+                margin-bottom: 30px;
+                width: 100%;
+            }
+
+            .card {
+                background-color: var(--card-background);
+                border-radius: 10px;
+                border: 1px solid var(--card-border);
+                padding: 20px;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                box-sizing: border-box;
+                min-height: 180px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card.turquoise::before {
+                background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            }
+            
+            .card.orange::before {
+                background: linear-gradient(90deg, #FF9500, #FF5E3A);
+            }
+            
+            .card.yellow::before {
+                background: linear-gradient(90deg, #FFD60A, #FFC107);
+            }
+
+            .sidebar-menu ul li a {
             display: block;
-            width: 100%;
-            height: 3px;
-            background-color: var(--primary-color);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo h1 {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background-color: var(--dark-color);
-            position: fixed;
-            top: 0;
-            left: -300px;
-            transition: left 0.4s ease;
-            z-index: 15;
-            padding-top: var(--header-height);
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
-            overflow-y: auto;
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar-menu {
-            padding: 20px 0;
-        }
-
-        .sidebar-menu ul {
-            list-style: none;
-        }
-
-        .sidebar-menu ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar-menu ul li a {
-            display: block;
+            height: 45px;
             padding: 12px 20px;
             color: var(--text-color);
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
-        }
+            width: 100%; 
+            box-sizing: border-box;
+            }
 
-        .sidebar-menu ul li a:hover {
+            .sidebar-menu ul li a:hover, 
+            .sidebar-menu ul li a.menu-toggle:hover {
             background-color: rgba(0, 230, 192, 0.1);
             border-left: 4px solid var(--primary-color);
             color: var(--primary-color);
-        }
-        
-        /* Stiluri pentru submeniu */
-        .submenu {
-            display: none;
-            padding-left: 15px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .submenu li {
-            margin-bottom: 0 !important;
-        }
-        
-        .submenu li a {
-            padding: 8px 15px !important;
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-        
-        .has-submenu.active .submenu {
+            width: 100%;
+            }
+
+            .has-submenu .menu-toggle {
+            width: 100%;
             display: block;
-        }
-        
-        .has-submenu .menu-toggle::after {
-            content: '▼';
-            font-size: 0.7em;
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-        }
-        
-        .has-submenu.active .menu-toggle::after {
-            transform: rotate(180deg);
-        }
-        
-        /* Stiluri pentru sub-submeniu */
-        .sub-submenu {
-            display: none;
-            padding-left: 15px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .sub-submenu li {
-            margin-bottom: 0 !important;
-        }
-        
-        .sub-submenu li a {
-            padding: 6px 10px !important;
-            font-size: 0.85em;
-            opacity: 0.85;
-        }
-        
-        .has-sub-submenu.active .sub-submenu {
-            display: block;
-        }
-        
-        .has-sub-submenu .sub-menu-toggle::after {
-            content: '▼';
-            font-size: 0.7em;
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-        }
-        
-        .has-sub-submenu.active .sub-menu-toggle::after {
-            transform: rotate(180deg);
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            margin-top: var(--header-height);
-            padding: 20px;
-            transition: margin-left 0.4s ease;
-            width: 100%;
-            max-width: 100%;
             box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        .page-title {
-            margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .page-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-
-        .card {
-            background-color: var(--card-background);
-            border-radius: 10px;
-            border: 1px solid var(--card-border);
-            padding: 20px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            box-sizing: border-box;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card.turquoise::before {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-        
-        .card.orange::before {
-            background: linear-gradient(90deg, #FF9500, #FF5E3A);
-        }
-        
-        .card.yellow::before {
-            background: linear-gradient(90deg, #FFD60A, #FFC107);
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card.turquoise:hover {
-            box-shadow: 0 0 20px rgba(0, 230, 192, 0.5);
-        }
-        
-        .card.orange:hover {
-            box-shadow: 0 0 20px rgba(255, 149, 0, 0.5);
-        }
-        
-        .card.yellow:hover {
-            box-shadow: 0 0 20px rgba(255, 214, 10, 0.5);
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .card p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 14;
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Animation Keyframes */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 230, 192, 0.4);
             }
-            70% {
-                box-shadow: 0 0 0 10px rgba(0, 230, 192, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 230, 192, 0);
-            }
-        }
 
-        /* Responsiveness */
-        /* Fix for mobile display issues */
-        @media (max-width: 768px) {
-            body, html {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
-            
-            .container {
-                width: 100%;
-                overflow-x: hidden;
-            }
-            
-            .card-container {
-                grid-template-columns: 1fr;
-                width: 100%;
-                overflow: visible;
-            }
-            
-            .card {
-                width: 100%;
-                height: auto;
-                min-height: 150px !important;
-                margin-bottom: 15px;
-                padding: 15px;
-                display: block;
-                box-sizing: border-box;
-            }
-            
             .card::before {
                 content: "";
-                display: block;
-                height: 5px;
+                position: absolute;
+                top: 0;
+                left: 0;
                 width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card-container {
-                grid-template-columns: 1fr;
-                padding: 0;
+                height: 5px;
             }
 
-            .logo h1 {
-                font-size: 0.9rem;
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             }
             
-            .main-content {
-                padding: 15px 10px;
+            .card.turquoise:hover {
+                box-shadow: 0 0 20px rgba(0, 230, 192, 0.5);
             }
             
-            .card {
+            .card.orange:hover {
+                box-shadow: 0 0 20px rgba(255, 149, 0, 0.5);
+            }
+            
+            .card.yellow:hover {
+                box-shadow: 0 0 20px rgba(255, 214, 10, 0.5);
+            }
+
+            .card h3 {
                 margin-bottom: 15px;
+                color: var(--primary-color);
             }
-        }
 
-        /* Brain Decoration */
-        .brain-decoration {
-            position: fixed;
-            bottom: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            opacity: 0.1;
-            z-index: -1;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6c0'%3E%3Cpath d='M12 2c1.9 0 3.6.8 4.8 2 1.2 1.2 2 2.9 2 4.8 0 3.2-2.2 5.8-5.2 6.6v.6c0 1.1-.9 2-2 2h-.4c-1.1 0-2-.9-2-2v-.6C6.2 14.6 4 12 4 8.8c0-1.9.8-3.6 2-4.8C7.4 2.8 9.1 2 11 2h1zm0 2c-1.3 0-2.5.5-3.4 1.4-.9.9-1.4 2.1-1.4 3.4 0 2.2 1.5 4.1 3.6 4.7.2.1.4.3.4.5v1c0 .6.4 1 1 1h.8c.6 0 1-.4 1-1v-1c0-.2.2-.4.4-.5 2.1-.6 3.6-2.5 3.6-4.7 0-1.3-.5-2.5-1.4-3.4-.9-.9-2.1-1.4-3.4-1.4h-1z'/%3E%3C/svg%3E");
-            background-size: cover;
-            background-repeat: no-repeat;
-            transform: rotate(45deg);
-        }
-    </style>
-</head>
-<body>
-    <div class="brain-decoration"></div>
-    
-    <!-- Header -->
-    <header>
-        <div class="menu-toggle" id="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
+            .card p {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            /* Overlay */
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 14;
+            }
+
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* Animation Keyframes */
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(0, 230, 192, 0.4);
+                }
+                70% {
+                    box-shadow: 0 0 0 10px rgba(0, 230, 192, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(0, 230, 192, 0);
+                }
+            }
+
+            /* Responsiveness */
+            /* Fix for mobile display issues */
+            @media (max-width: 768px) {
+                body, html {
+                    overflow-x: hidden;
+                    width: 100%;
+                    position: relative;
+                }
+                
+                .container {
+                    width: 100%;
+                    overflow-x: hidden;
+                }
+                
+                .card-container {
+                    grid-template-columns: 1fr;
+                    width: 100%;
+                    overflow: visible;
+                }
+                
+                .card {
+                    width: 100%;
+                    height: auto;
+                    min-height: 150px !important;
+                    margin-bottom: 15px;
+                    padding: 15px;
+                    display: block;
+                    box-sizing: border-box;
+                }
+                
+                .card::before {
+                    content: "";
+                    display: block;
+                    height: 5px;
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .card-container {
+                    grid-template-columns: 1fr;
+                    padding: 0;
+                }
+
+                .logo h1 {
+                    font-size: 0.9rem;
+                }
+                
+                .main-content {
+                    padding: 15px 10px;
+                }
+                
+                .card {
+                    margin-bottom: 15px;
+                }
+            }
+
+            /* Brain Decoration */
+            .brain-decoration {
+                position: fixed;
+                bottom: -100px;
+                right: -100px;
+                width: 300px;
+                height: 300px;
+                opacity: 0.1;
+                z-index: -1;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6c0'%3E%3Cpath d='M12 2c1.9 0 3.6.8 4.8 2 1.2 1.2 2 2.9 2 4.8 0 3.2-2.2 5.8-5.2 6.6v.6c0 1.1-.9 2-2 2h-.4c-1.1 0-2-.9-2-2v-.6C6.2 14.6 4 12 4 8.8c0-1.9.8-3.6 2-4.8C7.4 2.8 9.1 2 11 2h1zm0 2c-1.3 0-2.5.5-3.4 1.4-.9.9-1.4 2.1-1.4 3.4 0 2.2 1.5 4.1 3.6 4.7.2.1.4.3.4.5v1c0 .6.4 1 1 1h.8c.6 0 1-.4 1-1v-1c0-.2.2-.4.4-.5 2.1-.6 3.6-2.5 3.6-4.7 0-1.3-.5-2.5-1.4-3.4-.9-.9-2.1-1.4-3.4-1.4h-1z'/%3E%3C/svg%3E");
+                background-size: cover;
+                background-repeat: no-repeat;
+                transform: rotate(45deg);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="brain-decoration"></div>
+        
+        <!-- Header -->
+        <header>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#00e6c0" stroke-width="2" />
+                    <path d="M30,50 Q40,30 50,50 Q60,70 70,50" fill="none" stroke="#00e6c0" stroke-width="2" />
+                    <path d="M30,40 Q50,20 70,40" fill="none" stroke="#00e6c0" stroke-width="2" />
+                    <path d="M30,60 Q50,80 70,60" fill="none" stroke="#00e6c0" stroke-width="2" />
+                    <path d="M45,35 Q50,30 55,35" fill="none" stroke="#00e6c0" stroke-width="2" />
+                    <path d="M45,65 Q50,70 55,65" fill="none" stroke="#00e6c0" stroke-width="2" />
+                </svg>
+                <h1>BIOGENIUS ACADEMY</h1>
+            </div>
+            <div style="width: 30px;"></div> <!-- Empty div for balance -->
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="has-submenu">
+                        <a href="#" class="menu-toggle">Cursuri</a>
+                        <ul class="submenu">
+                            <li class="has-sub-submenu">
+                                <a href="#" class="sub-menu-toggle">Proba Teoretică</a>
+                                <ul class="sub-submenu">
+                                    <li><a href="https://alexie13.github.io/citologie/index.html">Citologia</a></li>
+                                    <li><a href="#">Ereditatea</a></li>
+                                    <li><a href="#">Variabilitatea Lumii Vii</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Proba Practică</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Grile</a></li>
+                    <li><a href="#">Simulări</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="logo">
-            <svg width="40" height="40" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#00e6c0" stroke-width="2" />
-                <path d="M30,50 Q40,30 50,50 Q60,70 70,50" fill="none" stroke="#00e6c0" stroke-width="2" />
-                <path d="M30,40 Q50,20 70,40" fill="none" stroke="#00e6c0" stroke-width="2" />
-                <path d="M30,60 Q50,80 70,60" fill="none" stroke="#00e6c0" stroke-width="2" />
-                <path d="M45,35 Q50,30 55,35" fill="none" stroke="#00e6c0" stroke-width="2" />
-                <path d="M45,65 Q50,70 55,65" fill="none" stroke="#00e6c0" stroke-width="2" />
-            </svg>
-            <h1>BIOGENIUS ACADEMY</h1>
-        </div>
-        <div style="width: 30px;"></div> <!-- Empty div for balance -->
-    </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-menu">
-            <ul>
-                <li class="has-submenu">
-                    <a href="#" class="menu-toggle">Cursuri</a>
-                    <br>
-                    <ul class="submenu">
-                        <li class="has-sub-submenu">
-                            <a href="#" class="sub-menu-toggle">Proba Teoretică</a>
-                            <ul class="sub-submenu">
-                                <li><a href="https://alexie13.github.io/citologie/index.html">Citologia</a></li>
-                                <li><a href="#">Ereditatea</a></li>
-                                <li><a href="#">Variabilitatea Lumii Vii</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Proba Practică</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Grile</a></li>
-                <li><a href="#">Simulări</a></li>
-            </ul>
-        </div>
-    </div>
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
 
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Main Content -->
-    <div class="container" id="container">
-        <div class="main-content">
-            <h2 class="page-title">Dashboard</h2>
-            
-            <div class="card-container">
-                <div class="card turquoise">
-                    <h3>Introducere în BioGenius Academy.</h3>
-                    <p>BioGenius Academy este o platformă dedicată elevilor de clasa a 9-a care au ca și pasiune BIOLOGIA și vor să participe și să exceleze la Olimpiada Națională de Biologie (ONB). Noi îi sprijinim cu materia bine structurată și concentrată din toate resursele, pentru a le fi mai ușor elevilor, grile pentru diverse capitole distincte destinate testării competenței fiecăruia și simulări care respectă formatul unei olimpiade reale, pregătindu-i astfel pentru competiție.</p>
-                </div>
-                <div class="card orange">
-                    <h3>Olimpiada Națională de Biologie (ONB).</h3>
-                    <p>Olimpiada Națională de Biologie (ONB) este o competiție academică dedicată elevilor pasionați de biologie, desfășurată anual în România. Aceasta oferă participanților oportunitatea de a-și demonstra cunoștințele și abilitățile atât teoretice, cât și practice, în cadrul unor probe complexe. Concursul se desfășoară în mai multe etape: județeană, națională și internațională, având ca scop promovarea excelenței în domeniul biologiei și stimularea interesului pentru științele vieții.</p>
-                </div>
-                <div class="card yellow">
-                    <h3>Cursuri: Proba teoretică, proba practică.</h3>
-                    <p>Platforma BioGenius Academy conține CURSURI care includ materia pentru etapa națională și județeană a ONB, acestea fiind structurate în două părți: proba teoretică și proba practică.
-                        - Proba teoretica: Proba teoretică a Olimpiadei de Biologie testează cunoștințele prin întrebări grilă, probleme și eseuri, acoperind diverse domenii ale biologiei și punând accent pe gândirea critică. Capitolele care intră în proba teoretică sunt: Citologia (studiul celulelor), Ereditatea și variabilitatea lumii vii, Diversitatea lumii vii.
-                         - Proba practica: Proba practică a Olimpiadei de Biologie evaluează abilitățile de analiză și aplicare prin experimente, observații microscopice și interpretarea unor fenomene biologice, testând dexteritatea și gândirea logică.</p>
-                </div>
-                <div class="card turquoise">
-                    <h3>Grile</h3>
-                    <p>Rezolvă gratuit grile pentru Olimpiada de Biologie – clasa a 9-a! BioGenius îți oferă o selecție de grile concepute conform materiei de concurs, pentru o pregătire solidă și eficientă. Testează-ți cunoștințele și perfecționează-ți strategia de rezolvare!</p>
-                </div>
-                <div class="card orange">
-                    <h3>Simulări de olimpiadă: județeană și națională.</h3>
-                    <p>5. Pregătește-te să cucerești Olimpiada de Biologie cu simulările județene și naționale! Aceste teste te ajută să îți evaluezi cunoștințele, să îți îmbunătățești strategia de rezolvare și să capeți încredere înainte de competiția reală. Exersează în condiții similare concursului și fii cu un pas înaintea provocării!</p>
+        <!-- Main Content -->
+        <div class="container" id="container">
+            <div class="main-content">
+                <h2 class="page-title">Dashboard</h2>
+                
+                <div class="card-container">
+                    <div class="card turquoise">
+                        <h3>Introducere în BioGenius Academy.</h3>
+                        <p>BioGenius Academy este o platformă dedicată elevilor de clasa a 9-a care au ca și pasiune BIOLOGIA și vor să participe și să exceleze la Olimpiada Națională de Biologie (ONB). Noi îi sprijinim cu materia bine structurată și concentrată din toate resursele, pentru a le fi mai ușor elevilor, grile pentru diverse capitole distincte destinate testării competenței fiecăruia și simulări care respectă formatul unei olimpiade reale, pregătindu-i astfel pentru competiție.</p>
+                    </div>
+                    <div class="card orange">
+                        <h3>Olimpiada Națională de Biologie (ONB).</h3>
+                        <p>Olimpiada Națională de Biologie (ONB) este o competiție academică dedicată elevilor pasionați de biologie, desfășurată anual în România. Aceasta oferă participanților oportunitatea de a-și demonstra cunoștințele și abilitățile atât teoretice, cât și practice, în cadrul unor probe complexe. Concursul se desfășoară în mai multe etape: județeană, națională și internațională, având ca scop promovarea excelenței în domeniul biologiei și stimularea interesului pentru științele vieții.</p>
+                    </div>
+                    <div class="card yellow">
+                        <h3>Cursuri: Proba teoretică, proba practică.</h3>
+                        <p>Platforma BioGenius Academy conține CURSURI care includ materia pentru etapa națională și județeană a ONB, acestea fiind structurate în două părți: proba teoretică și proba practică.
+                            - Proba teoretica: Proba teoretică a Olimpiadei de Biologie testează cunoștințele prin întrebări grilă, probleme și eseuri, acoperind diverse domenii ale biologiei și punând accent pe gândirea critică. Capitolele care intră în proba teoretică sunt: Citologia (studiul celulelor), Ereditatea și variabilitatea lumii vii, Diversitatea lumii vii.
+                            - Proba practica: Proba practică a Olimpiadei de Biologie evaluează abilitățile de analiză și aplicare prin experimente, observații microscopice și interpretarea unor fenomene biologice, testând dexteritatea și gândirea logică.</p>
+                    </div>
+                    <div class="card turquoise">
+                        <h3>Grile</h3>
+                        <p>Rezolvă gratuit grile pentru Olimpiada de Biologie – clasa a 9-a! BioGenius îți oferă o selecție de grile concepute conform materiei de concurs, pentru o pregătire solidă și eficientă. Testează-ți cunoștințele și perfecționează-ți strategia de rezolvare!</p>
+                    </div>
+                    <div class="card orange">
+                        <h3>Simulări de olimpiadă: județeană și națională.</h3>
+                        <p>5. Pregătește-te să cucerești Olimpiada de Biologie cu simulările județene și naționale! Aceste teste te ajută să îți evaluezi cunoștințele, să îți îmbunătățești strategia de rezolvare și să capeți încredere înainte de competiția reală. Exersează în condiții similare concursului și fii cu un pas înaintea provocării!</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // DOM Elements
-        const menuToggle = document.getElementById('menu-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const container = document.getElementById('container');
-        
-        // Toggle Sidebar Function
-        function toggleSidebar() {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+        <script>
+            // DOM Elements
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('container');
             
-            // Toggle Menu Icon Animation
-            const spans = menuToggle.getElementsByTagName('span');
-            if (sidebar.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+            // Toggle Sidebar Function
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
                 
-                // Close any open submenus when closing the sidebar
-                const openSubmenus = document.querySelectorAll('.has-submenu.active, .has-sub-submenu.active');
-                openSubmenus.forEach(item => {
-                    item.classList.remove('active');
+                // Toggle Menu Icon Animation
+                const spans = menuToggle.getElementsByTagName('span');
+                if (sidebar.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                    
+                    // Close any open submenus when closing the sidebar
+                    const openSubmenus = document.querySelectorAll('.has-submenu.active, .has-sub-submenu.active');
+                    openSubmenus.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                }
+            }
+            
+            // Event Listeners
+            menuToggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+            
+            // Submenu Toggle
+            const submenuItems = document.querySelectorAll('.has-submenu .menu-toggle');
+            
+            submenuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    
+                    // Toggle the active class on the parent li
+                    parent.classList.toggle('active');
+                    
+                    // Close other open submenus if needed
+                    const allSubmenus = document.querySelectorAll('.has-submenu');
+                    allSubmenus.forEach(submenuItem => {
+                        if(submenuItem !== parent && submenuItem.classList.contains('active')) {
+                            submenuItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Sub-Submenu Toggle
+            const subSubmenuItems = document.querySelectorAll('.has-sub-submenu .sub-menu-toggle');
+            
+            subSubmenuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    
+                    // Toggle the active class on the parent li
+                    parent.classList.toggle('active');
+                    
+                    // Close other open sub-submenus if needed
+                    const allSubSubmenus = document.querySelectorAll('.has-sub-submenu');
+                    allSubSubmenus.forEach(subSubmenuItem => {
+                        if(subSubmenuItem !== parent && subSubmenuItem.classList.contains('active')) {
+                            subSubmenuItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Card Animation on Scroll
+            const cards = document.querySelectorAll('.card');
+            
+            function checkCards() {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                cards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    
+                    if (cardTop < triggerBottom) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                    }
                 });
             }
-        }
-        
-        // Event Listeners
-        menuToggle.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-        
-        // Submenu Toggle
-        const submenuItems = document.querySelectorAll('.has-submenu .menu-toggle');
-        
-        submenuItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const parent = this.parentElement;
-                
-                // Toggle the active class on the parent li
-                parent.classList.toggle('active');
-                
-                // Close other open submenus if needed
-                const allSubmenus = document.querySelectorAll('.has-submenu');
-                allSubmenus.forEach(submenuItem => {
-                    if(submenuItem !== parent && submenuItem.classList.contains('active')) {
-                        submenuItem.classList.remove('active');
-                    }
-                });
-            });
-        });
-        
-        // Sub-Submenu Toggle
-        const subSubmenuItems = document.querySelectorAll('.has-sub-submenu .sub-menu-toggle');
-        
-        subSubmenuItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const parent = this.parentElement;
-                
-                // Toggle the active class on the parent li
-                parent.classList.toggle('active');
-                
-                // Close other open sub-submenus if needed
-                const allSubSubmenus = document.querySelectorAll('.has-sub-submenu');
-                allSubSubmenus.forEach(subSubmenuItem => {
-                    if(subSubmenuItem !== parent && subSubmenuItem.classList.contains('active')) {
-                        subSubmenuItem.classList.remove('active');
-                    }
-                });
-            });
-        });
-        
-        // Card Animation on Scroll
-        const cards = document.querySelectorAll('.card');
-        
-        function checkCards() {
-            const triggerBottom = window.innerHeight * 0.8;
             
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                
-                if (cardTop < triggerBottom) {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                } else {
+            // Initialize Cards and check for mobile viewport
+            function initCards() {
+                cards.forEach(card => {
                     card.style.opacity = '0';
                     card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                });
+                
+                // Force reflow to apply initial styles before triggering animations
+                document.body.offsetHeight;
+                
+                // Immediate check for cards
+                checkCards();
+                
+                // Check if on mobile and adjust if needed
+                if (window.innerWidth <= 768) {
+                    adjustForMobile();
+                }
+            }
+            
+            // Adjust for mobile specific issues
+            function adjustForMobile() {
+                // Ensure cards are visible on mobile
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.minHeight = '150px';
+                    card.style.display = 'block';
+                    card.style.width = '100%';
+                });
+            }
+            
+            // Check cards on load and scroll
+            window.addEventListener('load', initCards);
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 768) {
+                    adjustForMobile();
                 }
             });
-        }
-        
-        // Initialize Cards and check for mobile viewport
-        function initCards() {
+            window.addEventListener('scroll', checkCards);
+            
+            // Glow effect on hover for cards
             cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.addEventListener('mouseenter', () => {
+                    card.style.boxShadow = '0 0 15px rgba(0, 230, 192, 0.5)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+                });
             });
-            
-            // Force reflow to apply initial styles before triggering animations
-            document.body.offsetHeight;
-            
-            // Immediate check for cards
-            checkCards();
-            
-            // Check if on mobile and adjust if needed
-            if (window.innerWidth <= 768) {
-                adjustForMobile();
-            }
-        }
-        
-        // Adjust for mobile specific issues
-        function adjustForMobile() {
-            // Ensure cards are visible on mobile
-            cards.forEach(card => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-                card.style.minHeight = '150px';
-                card.style.display = 'block';
-                card.style.width = '100%';
-            });
-        }
-        
-        // Check cards on load and scroll
-        window.addEventListener('load', initCards);
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 768) {
-                adjustForMobile();
-            }
-        });
-        window.addEventListener('scroll', checkCards);
-        
-        // Glow effect on hover for cards
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.boxShadow = '0 0 15px rgba(0, 230, 192, 0.5)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
-            });
-        });
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>
